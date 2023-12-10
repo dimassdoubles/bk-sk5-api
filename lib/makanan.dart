@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Makanan {
   static const examples = _examples;
 
@@ -21,6 +23,22 @@ class Makanan {
     required this.gambarlain,
     required this.bahan,
   });
+
+  factory Makanan.fromJson(Map<String, dynamic> json) {
+    debugPrint("Makanan.fromJson");
+    return Makanan(
+      nama: json["nama"],
+      deskripsi: json["deskripsi"],
+      gambar: json["gambar"],
+      detail: json["detail"],
+      waktubuka: json["waktubuka"],
+      harga: json["harga"],
+      kalori: json["kalori"],
+      gambarlain: List<String>.from(json["gambarlain"]),
+      bahan: List<Map<String, String>>.from(json["bahan"].map(
+          (x) => Map.from(x).map((k, v) => MapEntry<String, String>(k, v)))),
+    );
+  }
 }
 
 const List<Makanan> _examples = [
